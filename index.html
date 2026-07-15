@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منيو الكاشير</title>
+    <style>
+        /* الإعدادات الأساسية */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0078d7; /* لون الخلفية الأزرق بتاع الشاشة */
+            overflow: hidden; 
+        }
+
+        /* حاوية الشاشة متقسمة لجزئين */
+        .pos-container {
+            display: flex;
+            height: 100vh;
+        }
+
+        /* الجزء اليمين: قايمة الأقسام */
+        .categories-sidebar {
+            width: 25%;
+            background-color: #1a1a1a;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            border-left: 3px solid #333;
+            overflow-y: auto; /* سكرول لو الأقسام كترت */
+        }
+
+        /* الجزء الشمال: عرض الأصناف */
+        .items-display {
+            width: 75%;
+            padding: 20px;
+            display: flex;
+            flex-wrap: wrap; 
+            align-content: flex-start;
+            gap: 15px;
+            overflow-y: auto;
+        }
+
+        /* رسالة البداية */
+        .welcome-msg {
+            color: #fff;
+            text-align: center;
+            width: 100%;
+            margin-top: 20%;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        /* تصميم زراير الأقسام الرئيسية */
+        .cat-btn {
+            width: 100%;
+            padding: 15px 10px;
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+            border: 1px solid #fff;
+            border-radius: 4px;
+            cursor: pointer;
+            text-align: center;
+            transition: transform 0.1s;
+        }
+        
+        .cat-btn:active {
+            transform: scale(0.96);
+        }
+
+        /* ألوان الأقسام زي ما في الصورة بالظبط */
+        .btn-blue { background-color: #0000ff; }
+        .btn-dark-purple { background-color: #4b004b; }
+        .btn-dark-red { background-color: #8b0000; }
+        .btn-purple { background-color: #6a0dad; }
+        .btn-olive { background-color: #808000; }
+        .btn-red { background-color: #cc0000; }
+        .btn-green { background-color: #32cd32; }
+
+        /* تصميم كروت الأصناف اللي هتظهر */
+        .item-card {
+            background-color: #ffffff;
+            color: #000000;
+            padding: 20px;
+            border-radius: 8px;
+            font-size: 20px;
+            font-weight: bold;
+            width: calc(33.333% - 15px); 
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            cursor: pointer;
+            border: 2px solid #ddd;
+        }
+
+        .item-card:hover {
+            background-color: #f0f0f0;
+            border-color: #0078d7;
+        }
+
+        /* تظبيط مقاسات الكروت للموبايل */
+        @media (max-width: 768px) {
+            .item-card {
+                width: calc(50% - 15px);
+            }
+            .categories-sidebar {
+                width: 35%;
+            }
+            .items-display {
+                width: 65%;
+            }
+            .cat-btn {
+                font-size: 16px;
+                padding: 12px 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="pos-container">
+        
+        <!-- القايمة اللي فيها الأقسام بالترتيب والألوان -->
+        <div class="categories-sidebar">
+            <button class="cat-btn btn-blue" onclick="showItems('sofra')">سفرة الواحه</button>
+            <button class="cat-btn btn-blue" onclick="showItems('fool')">الفول</button>
+            <button class="cat-btn btn-dark-purple" onclick="showItems('ta3meya')">الطعمية</button>
+            <button class="cat-btn btn-dark-red" onclick="showItems('batates')">البطاطس</button>
+            <button class="cat-btn btn-dark-purple" onclick="showItems('baid')">البيض</button>
+            <button class="cat-btn btn-purple" onclick="showItems('waha')">الواحة</button>
+            <button class="cat-btn btn-olive" onclick="showItems('gebna')">الجبنة</button>
+            <button class="cat-btn btn-red" onclick="showItems('elbat')">العلب</button>
+            <button class="cat-btn btn-green" onclick="showItems('edafat')">الاضافات</button>
+        </div>
+
+        <!-- الجزء اللي هيظهر فيه الأصناف -->
+        <div class="items-display" id="display-area">
+            <div class="welcome-msg">👈 اختر قسم من القائمة الجانبية لعرض الأصناف</div>
+        </div>
+
+    </div>
+
+    <script>
+        // الداتا بتاعة المنيو كاملة
+        const menuData = {
+            'sofra': [
+                'سفرة التوفير - 50 ج',
+                'سفرة العيلة - 120 ج',
+                'سفرة الواحة سبيشيال - 150 ج'
+            ],
+            'fool': [
+                'ساندوتش فول سادة - 10 ج',
+                'ساندوتش فول إسكندراني - 15 ج',
+                'ساندوتش فول بالزيت الحار - 12 ج',
+                'ساندوتش فول بالصلصة - 13 ج',
+                'ساندوتش فول بالبيض - 18 ج',
+                'ساندوتش فول بالسجق - 25 ج'
+            ],
+            'ta3meya': [
+                'ساندوتش طعمية سادة - 10 ج',
+                'ساندوتش طعمية محشية - 12 ج',
+                'ساندوتش طعمية بالبيض - 15 ج',
+                'ساندوتش طعمية إسكندراني - 13 ج',
+                'قرص طعمية عجة - 5 ج'
+            ],
+            'batates': [
+                'ساندوتش بطاطس صوابع - 15 ج',
+                'ساندوتش بطاطس مهروسة - 12 ج',
+                'ساندوتش بطاطس بانيه - 20 ج',
+                'ساندوتش بطاطس بالجبنة الرومي - 22 ج',
+                'ساندوتش بطاطس كاتشب ومايونيز - 18 ج'
+            ],
+            'baid': [
+                'ساندوتش بيض مسلوق - 12 ج',
+                'ساندوتش بيض مقلي - 15 ج',
+                'ساندوتش بيض بالبسطرمة - 25 ج',
+                'ساندوتش بيض بالسجق - 25 ج',
+                'شكشوكة - 18 ج'
+            ],
+            'waha': [
+                'رغيف حواوشي الواحة - 40 ج',
+                'ساندوتش مكس الواحة - 30 ج',
+                'ديناميت الواحة - 35 ج'
+            ],
+            'gebna': [
+                'ساندوتش جبنة بيضاء - 10 ج',
+                'ساندوتش جبنة رومي مقلية - 20 ج',
+                'ساندوتش جبنة قديمة بالطماطم - 15 ج',
+                'ساندوتش مكس جبن - 25 ج'
+            ],
+            'elbat': [
+                'علبة فول سادة - 20 ج',
+                'علبة عجينة طعمية - 15 ج',
+                'علبة بطاطس - 25 ج',
+                'علبة مسقعة - 20 ج',
+                'علبة بابا غنوج - 15 ج'
+            ],
+            'edafat': [
+                'طلب باذنجان مخلل - 5 ج',
+                'طلب سلطة خضراء - 5 ج',
+                'طلب طماطم مخللة - 5 ج',
+                'كيس عيش إضافي - 5 ج',
+                'كاتشب / مايونيز إضافي - 3 ج'
+            ]
+        };
+
+        // الدالة اللي بتعرض الأصناف
+        function showItems(categoryKey) {
+            const displayArea = document.getElementById('display-area');
+            displayArea.innerHTML = ''; 
+            
+            const items = menuData[categoryKey];
+            
+            if (items && items.length > 0) {
+                items.forEach(item => {
+                    const itemDiv = document.createElement('div');
+                    itemDiv.className = 'item-card';
+                    itemDiv.innerText = item;
+                    displayArea.appendChild(itemDiv);
+                });
+            } else {
+                displayArea.innerHTML = '<div class="welcome-msg">لا توجد أصناف في هذا القسم حالياً</div>';
+            }
+        }
+    </script>
+
+</body>
+</html>
