@@ -83,7 +83,6 @@
         
         .cart-item-row { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 15px; border-bottom: 1px dashed #eee; padding-bottom: 5px; }
         
-        /* تنسيق نظام الفاتورة */
         .invoice-box { background: #f9f9f9; padding: 15px; border-radius: 8px; border: 1px solid #ddd; margin-bottom: 15px; }
         .invoice-row { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 15px; color: #555; }
         .total-row { display: flex; justify-content: space-between; font-weight: bold; font-size: 18px; color: #a81c1c; border-top: 2px solid #ddd; padding-top: 10px; margin-top: 5px; }
@@ -121,21 +120,7 @@
         <div class="page" id="page-1">
             <div class="category">
                 <h2 class="category-title">سندوتشات الفول</h2>
-                <script>
-                    const foulItems = [
-                        {id: 1, name: "فول الواحة", price: 15}, {id: 2, name: "فول زيت حار", price: 16}, {id: 3, name: "فول زيت زيتون", price: 16},
-                        {id: 4, name: "فول اسكندراني", price: 16}, {id: 5, name: "فول ع طعمية", price: 18}, {id: 6, name: "فول ع طعمية محشية", price: 20},
-                        {id: 7, name: "فول ع طعمية ع باذنجان", price: 25}, {id: 8, name: "فول ع أومليت", price: 30}, {id: 9, name: "فول ع أومليت بسطرمة", price: 35},
-                        {id: 10, name: "فول ع باذنجان", price: 18}, {id: 11, name: "فول ع بابا غنوج", price: 20}, {id: 12, name: "فول بالصلصة", price: 15},
-                        {id: 13, name: "فول دبل", price: 18}, {id: 14, name: "فول مخصوص", price: 18}, {id: 15, name: "فول ع صوابع", price: 22}, {id: 16, name: "فول ع بيض مسلوق", price: 25}
-                    ];
-                    foulItems.forEach(item => {
-                        document.write(`<div class="item" data-id="${item.id}" data-name="${item.name}" data-price="${item.price}">
-                            <div class="item-info"><span class="item-name">${item.name}</span><span class="item-price">${item.price} ج</span></div>
-                            <div class="quantity-control"><button onclick="updateQty(${item.id}, 1)">+</button><span id="qty-${item.id}">0</span><button onclick="updateQty(${item.id}, -1)">-</button></div>
-                        </div>`);
-                    });
-                </script>
+                <div id="foul-list"></div>
             </div>
         </div>
 
@@ -143,23 +128,7 @@
         <div class="page" id="page-2">
             <div class="category">
                 <h2 class="category-title">سندوتشات البطاطس</h2>
-                <script>
-                    const batatesItems = [
-                        {id: 17, name: "بطاطس صوابع", price: 22}, {id: 18, name: "بطاطس ع جبنة قريش", price: 24}, {id: 19, name: "صوابع ع باذنجان", price: 24},
-                        {id: 20, name: "صوابع رومي", price: 35}, {id: 21, name: "صوابع أومليت", price: 30}, {id: 22, name: "صوابع أومليت بسطرمة", price: 35},
-                        {id: 23, name: "صوابع أومليت بيتزا", price: 40}, {id: 24, name: "صوابع ع مقلية", price: 40}, {id: 25, name: "صوابع بالبيض", price: 25},
-                        {id: 26, name: "صوابع كاتشب", price: 20}, {id: 27, name: "صوابع كاتشب مايونيز", price: 22}, {id: 28, name: "صوابع بابا غنوج", price: 25},
-                        {id: 29, name: "صوابع جمبري", price: 20}, {id: 30, name: "شيبسي", price: 18}, {id: 31, name: "شيبسي رومي", price: 30},
-                        {id: 32, name: "شيبسي بالبيض", price: 25}, {id: 33, name: "شيبسي أومليت", price: 25}, {id: 34, name: "بطاطس بورية", price: 16},
-                        {id: 35, name: "بطاطس بورية بالبيض", price: 25}, {id: 36, name: "بطاطس بورية ع جبنة رومي", price: 35}
-                    ];
-                    batatesItems.forEach(item => {
-                        document.write(`<div class="item" data-id="${item.id}" data-name="${item.name}" data-price="${item.price}">
-                            <div class="item-info"><span class="item-name">${item.name}</span><span class="item-price">${item.price} ج</span></div>
-                            <div class="quantity-control"><button onclick="updateQty(${item.id}, 1)">+</button><span id="qty-${item.id}">0</span><button onclick="updateQty(${item.id}, -1)">-</button></div>
-                        </div>`);
-                    });
-                </script>
+                <div id="batates-list"></div>
             </div>
         </div>
 
@@ -167,170 +136,92 @@
         <div class="page" id="page-3">
             <div class="category">
                 <h2 class="category-title">سندوتشات الطعمية</h2>
-                <script>
-                    const ta3meyaItems = [
-                        {id: 37, name: "طعمية عادي", price: 15}, {id: 38, name: "طعمية كفتة", price: 15}, {id: 39, name: "طعمية محشية", price: 18},
-                        {id: 40, name: "طعمية بالبيض", price: 22}, {id: 41, name: "طعمية ع باذنجان", price: 20}, {id: 42, name: "طعمية ع مسقعة", price: 20},
-                        {id: 43, name: "طعمية ع بابا غنوج", price: 20}, {id: 44, name: "طعمية ع بطاطس", price: 24}, {id: 45, name: "طعمية بالبسطرمة", price: 30},
-                        {id: 46, name: "طعمية كيري", price: 25}, {id: 47, name: "طعمية ع أمليت", price: 30}, {id: 48, name: "طعمية دوبل", price: 18}, {id: 49, name: "طعمية عين كتكوت", price: 20}
-                    ];
-                    ta3meyaItems.forEach(item => {
-                        document.write(`<div class="item" data-id="${item.id}" data-name="${item.name}" data-price="${item.price}">
-                            <div class="item-info"><span class="item-name">${item.name}</span><span class="item-price">${item.price} ج</span></div>
-                            <div class="quantity-control"><button onclick="updateQty(${item.id}, 1)">+</button><span id="qty-${item.id}">0</span><button onclick="updateQty(${item.id}, -1)">-</button></div>
-                        </div>`);
-                    });
-                </script>
+                <div id="ta3meya-list"></div>
             </div>
         </div>
 
-        <!-- الصفحة 4: الأومليت والأقراص -->
+        <!-- الصفحة 4: الأومليت والمتنوع -->
         <div class="page" id="page-4">
             <div class="category">
-                <h2 class="category-title">سندوتشات الأومليت والمتنوع</h2>
-                <script>
-                    const omeletItems = [
-                        {id: 50, name: "بيض مسلوق", price: 16}, {id: 51, name: "بيض أومليت", price: 20}, {id: 52, name: "أومليت بسطرمة", price: 30},
-                        {id: 53, name: "أومليت رومي", price: 30}, {id: 54, name: "أومليت بيتزا", price: 40}, {id: 55, name: "أومليت أباتشي", price: 40},
-                        {id: 56, name: "جبنة قريش", price: 18}, {id: 57, name: "سندوتش مسقعة / باذنجان", price: 15}, {id: 58, name: "ديناميت", price: 35}
-                    ];
-                    omeletItems.forEach(item => {
-                        document.write(`<div class="item" data-id="${item.id}" data-name="${item.name}" data-price="${item.price}">
-                            <div class="item-info"><span class="item-name">${item.name}</span><span class="item-price">${item.price} ج</span></div>
-                            <div class="quantity-control"><button onclick="updateQty(${item.id}, 1)">+</button><span id="qty-${item.id}">0</span><button onclick="updateQty(${item.id}, -1)">-</button></div>
-                        </div>`);
-                    });
-                </script>
+                <h2 class="category-title">سندوتشات الأومليت</h2>
+                <div id="omelet-list"></div>
             </div>
             <div class="category">
-                <h2 class="category-title">أقراص الطعمية</h2>
-                <script>
-                    const diskItems = [
-                        {id: 59, name: "قرص طعمية", price: 3}, {id: 60, name: "قرص سادة كبير", price: 6}, {id: 61, name: "قرص طعمية محشية", price: 8},
-                        {id: 62, name: "قرص عجة (صغير)", price: 15}, {id: 63, name: "قرص عجة (كبير)", price: 25}, {id: 64, name: "قرص طعمية كيري", price: 25},
-                        {id: 65, name: "قرص أماطي", price: 24}
-                    ];
-                    diskItems.forEach(item => {
-                        document.write(`<div class="item" data-id="${item.id}" data-name="${item.name}" data-price="${item.price}">
-                            <div class="item-info"><span class="item-name">${item.name}</span><span class="item-price">${item.price} ج</span></div>
-                            <div class="quantity-control"><button onclick="updateQty(${item.id}, 1)">+</button><span id="qty-${item.id}">0</span><button onclick="updateQty(${item.id}, -1)">-</button></div>
-                        </div>`);
-                    });
-                </script>
+                <h2 class="category-title">سندوتشات متنوع</h2>
+                <div id="motanaw3-list"></div>
             </div>
         </div>
 
-        <!-- الصفحة 5: السفرة -->
+        <!-- الصفحة 5: أقراص الطعمية -->
         <div class="page" id="page-5">
             <div class="category">
-                <h2 class="category-title">سفره الواحة</h2>
-                <script>
-                    const sofraItems = [
-                        {id: 66, name: "طبق فول حار / حلو", price: 55}, {id: 67, name: "طبق طعمية", price: 12}, {id: 68, name: "طبق طعمية محشية", price: 15},
-                        {id: 69, name: "طبق بطاطس", price: 25}, {id: 70, name: "طبق مسقعة", price: 20}, {id: 71, name: "طبق شكشوكة مخصوص", price: 25},
-                        {id: 72, name: "طبق أومليت سادة (صغير)", price: 30}, {id: 73, name: "طبق أومليت سادة (كبير)", price: 40},
-                        {id: 74, name: "طبق اباتشي (صغير)", price: 35}, {id: 75, name: "طبق اباتشي (كبير)", price: 40},
-                        {id: 76, name: "طبق أومليت بسطرمة (صغير)", price: 35}, {id: 77, name: "طبق أومليت بسطرمة (كبير)", price: 40},
-                        {id: 78, name: "طبق أومليت خضار (صغير)", price: 30}, {id: 79, name: "طبق أومليت خضار (كبير)", price: 40},
-                        {id: 80, name: "طبق مقلية", price: 40}, {id: 81, name: "طبق طحينة (صغير)", price: 20}, {id: 82, name: "طبق طحينة (كبير)", price: 25}
-                    ];
-                    sofraItems.forEach(item => {
-                        document.write(`<div class="item" data-id="${item.id}" data-name="${item.name}" data-price="${item.price}">
-                            <div class="item-info"><span class="item-name">${item.name}</span><span class="item-price">${item.price} ج</span></div>
-                            <div class="quantity-control"><button onclick="updateQty(${item.id}, 1)">+</button><span id="qty-${item.id}">0</span><button onclick="updateQty(${item.id}, -1)">-</button></div>
-                        </div>`);
-                    });
-                </script>
+                <h2 class="category-title">أقراص الطعمية</h2>
+                <div id="disk-list"></div>
             </div>
         </div>
 
-        <!-- الصفحة 6: العلب والمشروبات (الكاملة) -->
+        <!-- الصفحة 6: سفرة الواحة 1 -->
         <div class="page" id="page-6">
             <div class="category">
-                <h2 class="category-title">ركن العلب (فول)</h2>
-                <script>
-                    const foulBoxes = [
-                        {id: 83, name: "علبة فول سادة (صغير)", price: 25}, {id: 84, name: "علبة فول سادة (كبير)", price: 30},
-                        {id: 85, name: "علبة فول زيت زيتون (صغير)", price: 30}, {id: 86, name: "علبة فول زيت زيتون (كبير)", price: 40},
-                        {id: 87, name: "علبة فول زيت حار (صغير)", price: 30}, {id: 88, name: "علبة فول زيت حار (كبير)", price: 35},
-                        {id: 89, name: "علبة فول الواحة (صغير)", price: 30}, {id: 90, name: "علبة فول الواحة (كبير)", price: 35},
-                        {id: 91, name: "علبة فول محوج (صغير)", price: 30}, {id: 92, name: "علبة فول محوج (كبير)", price: 35},
-                        {id: 93, name: "علبة فول اسكندراني (صغير)", price: 35}, {id: 94, name: "علبة فول اسكندراني (كبير)", price: 40},
-                        {id: 95, name: "علبة فول بالبيض (صغير)", price: 38}, {id: 96, name: "علبة فول بالبيض (كبير)", price: 45},
-                        {id: 97, name: "علبة فول أومليت (صغير)", price: 38}, {id: 98, name: "علبة فول أومليت (كبير)", price: 45},
-                        {id: 99, name: "علبة فول بالبسطرمة (صغير)", price: 40}, {id: 100, name: "علبة فول بالبسطرمة (كبير)", price: 50},
-                        {id: 101, name: "علبة فول بالصلصة (صغير)", price: 30}, {id: 102, name: "علبة فول بالصلصة (كبير)", price: 35}
-                    ];
-                    foulBoxes.forEach(item => {
-                        document.write(`<div class="item" data-id="${item.id}" data-name="${item.name}" data-price="${item.price}">
-                            <div class="item-info"><span class="item-name">${item.name}</span><span class="item-price">${item.price} ج</span></div>
-                            <div class="quantity-control"><button onclick="updateQty(${item.id}, 1)">+</button><span id="qty-${item.id}">0</span><button onclick="updateQty(${item.id}, -1)">-</button></div>
-                        </div>`);
-                    });
-                </script>
+                <h2 class="category-title">سفره الواحة (أطباق)</h2>
+                <div id="sofra1-list"></div>
             </div>
+        </div>
 
+        <!-- الصفحة 7: سفرة الواحة 2 -->
+        <div class="page" id="page-7">
+            <div class="category">
+                <h2 class="category-title">سفره الواحة (إضافات)</h2>
+                <div id="sofra2-list"></div>
+            </div>
+        </div>
+
+        <!-- الصفحة 8: ركن العلب 1 -->
+        <div class="page" id="page-8">
+            <div class="category">
+                <h2 class="category-title">ركن العلب (فول)</h2>
+                <div id="elba1-list"></div>
+            </div>
+        </div>
+
+        <!-- الصفحة 9: ركن العلب 2 -->
+        <div class="page" id="page-9">
             <div class="category">
                 <h2 class="category-title">ركن العلب (إضافات)</h2>
-                <script>
-                    const extraBoxes = [
-                        {id: 103, name: "عجينة علبة (صغير)", price: 15}, {id: 104, name: "عجينة علبة (كبير)", price: 20},
-                        {id: 105, name: "مسقعة علبة (صغير)", price: 25}, {id: 106, name: "مسقعة علبة (كبير)", price: 32},
-                        {id: 107, name: "جبنة قريش علبة (صغير)", price: 30}, {id: 108, name: "جبنة قريش علبة (كبير)", price: 35},
-                        {id: 109, name: "بورية علبة (صغير)", price: 25}, {id: 110, name: "بورية علبة (كبير)", price: 35},
-                        {id: 111, name: "باذنجان علبة (صغير)", price: 10}, {id: 112, name: "باذنجان علبة (كبير)", price: 15},
-                        {id: 113, name: "شكشوكة علبة (صغير)", price: 25}, {id: 114, name: "شكشوكة علبة (كبير)", price: 35},
-                        {id: 115, name: "باكيت بطاطس صوابع (صغير)", price: 25}, {id: 116, name: "باكيت بطاطس صوابع (وسط)", price: 30}, {id: 117, name: "باكيت بطاطس صوابع (كبير)", price: 40},
-                        {id: 118, name: "باكيت شيبسي (صغير)", price: 20}, {id: 119, name: "باكيت شيبسي (وسط)", price: 25}, {id: 120, name: "باكيت شيبسي (كبير)", price: 30},
-                        {id: 121, name: "باكيت بطاطس جمبري (صغير)", price: 25}, {id: 122, name: "باكيت بطاطس جمبري (وسط)", price: 30}, {id: 123, name: "باكيت بطاطس جمبري (كبير)", price: 40}
-                    ];
-                    extraBoxes.forEach(item => {
-                        document.write(`<div class="item" data-id="${item.id}" data-name="${item.name}" data-price="${item.price}">
-                            <div class="item-info"><span class="item-name">${item.name}</span><span class="item-price">${item.price} ج</span></div>
-                            <div class="quantity-control"><button onclick="updateQty(${item.id}, 1)">+</button><span id="qty-${item.id}">0</span><button onclick="updateQty(${item.id}, -1)">-</button></div>
-                        </div>`);
-                    });
-                </script>
+                <div id="elba2-list"></div>
             </div>
+        </div>
 
+        <!-- الصفحة 10: السلطات والمشروبات والملاحظات -->
+        <div class="page" id="page-10">
             <div class="category">
                 <h2 class="category-title">السلطات والمشروبات</h2>
-                <script>
-                    const saladDrinks = [
-                        {id: 124, name: "سلطة بلدي (صغير)", price: 10}, {id: 125, name: "سلطة بلدي (كبير)", price: 15},
-                        {id: 126, name: "طبق مخلل مخصوص (صغير)", price: 10}, {id: 127, name: "طبق مخلل مخصوص (كبير)", price: 13},
-                        {id: 128, name: "طرشي (صغير)", price: 5}, {id: 129, name: "طرشي (وسط)", price: 10}, {id: 130, name: "طرشي (كبير)", price: 15},
-                        {id: 131, name: "بابا غنوج (صغير)", price: 15}, {id: 132, name: "بابا غنوج (كبير)", price: 20},
-                        {id: 133, name: "طحينة (صغير)", price: 10}, {id: 134, name: "طحينة (كبير)", price: 15},
-                        {id: 135, name: "رغيف عيش بلدي", price: 3.5}, {id: 136, name: "رغيف عيش شامي", price: 2},
-                        {id: 137, name: "كانز كبيرة", price: 20}, {id: 138, name: "مياة معدنية", price: 10}
-                    ];
-                    saladDrinks.forEach(item => {
-                        document.write(`<div class="item" data-id="${item.id}" data-name="${item.name}" data-price="${item.price}">
-                            <div class="item-info"><span class="item-name">${item.name}</span><span class="item-price">${item.price} ج</span></div>
-                            <div class="quantity-control"><button onclick="updateQty(${item.id}, 1)">+</button><span id="qty-${item.id}">0</span><button onclick="updateQty(${item.id}, -1)">-</button></div>
-                        </div>`);
-                    });
-                </script>
+                <div id="salads-list"></div>
             </div>
             
             <div class="notes">
                 <p>جميع السندوتشات (بلدي - شامي - فينو)</p>
+                <p>إضافة سلطة بلدي أو طرنشات على السندوتش يتم إضافة 3 ج</p>
                 <p>11 شارع النزهة ناصية تاج الدين السبكي</p>
+                <span class="phones">للتوصيل: <span dir="ltr">01154188441 - 0224178052</span></span>
+                <span class="phones">للتوصيل: <span dir="ltr">01283156131 - 01070341501</span></span>
+                <span class="phones">للتوصيل: <span dir="ltr">01128964794 - 01155192984</span></span>
                 <p class="instapay">يوجد انستا باي وكاش علي (01154188441)</p>
             </div>
         </div>
 
     </div>
 
+    <!-- السلة العائمة -->
     <div class="floating-cart" id="floatingCart" onclick="openCart()">
         <h3>السلة (<span id="cartCount">0</span>)</h3>
         <span>تأكيد الطلب ➔</span>
     </div>
 
+    <!-- شريط التقليب -->
     <div class="pagination" id="pagination">
         <button onclick="nextPage()" id="nextBtn">التالي</button>
-        <span class="page-indicator" id="pageIndicator">1 / 6</span>
+        <span class="page-indicator" id="pageIndicator">1 / 10</span>
         <button onclick="prevPage()" id="prevBtn">السابق</button>
     </div>
 
@@ -344,7 +235,7 @@
             
             <div class="cart-items-list" id="cartItemsList"></div>
             
-            <!-- نظام الفاتورة الجديد -->
+            <!-- نظام الفاتورة -->
             <div class="invoice-box">
                 <div class="invoice-row">
                     <span>سعر الطلبات:</span>
@@ -360,7 +251,7 @@
                 </div>
             </div>
 
-            <!-- نوع الطلب (دليفري أو صالة) -->
+            <!-- نوع الطلب -->
             <div class="order-type-group">
                 <label><input type="radio" name="orderType" value="delivery" checked onchange="updateInvoice()"> دليفري توصيل</label>
                 <label><input type="radio" name="orderType" value="dinein" onchange="updateInvoice()"> صالة / تيك أواي</label>
@@ -385,12 +276,118 @@
         </div>
     </div>
 
+    <!-- برمجة المنيو وإضافة البيانات -->
     <script>
+        // تعريف الأقسام والمنتجات
+        const menuData = {
+            "foul-list": [
+                {id: 1, name: "فول الواحة", price: 15}, {id: 2, name: "فول زيت حار", price: 16}, {id: 3, name: "فول زيت زيتون", price: 16},
+                {id: 4, name: "فول اسكندراني", price: 16}, {id: 5, name: "فول ع طعمية", price: 18}, {id: 6, name: "فول ع طعمية محشية", price: 20},
+                {id: 7, name: "فول ع طعمية ع باذنجان", price: 25}, {id: 8, name: "فول ع أومليت", price: 30}, {id: 9, name: "فول ع أومليت بسطرمة", price: 35},
+                {id: 10, name: "فول ع باذنجان", price: 18}, {id: 11, name: "فول ع بابا غنوج", price: 20}, {id: 12, name: "فول بالصلصة", price: 15},
+                {id: 13, name: "فول دبل", price: 18}, {id: 14, name: "فول مخصوص", price: 18}, {id: 15, name: "فول ع صوابع", price: 22}, {id: 16, name: "فول ع بيض مسلوق", price: 25}
+            ],
+            "batates-list": [
+                {id: 17, name: "بطاطس صوابع", price: 22}, {id: 18, name: "بطاطس ع جبنة قريش", price: 24}, {id: 19, name: "صوابع ع باذنجان", price: 24},
+                {id: 20, name: "صوابع رومي", price: 35}, {id: 21, name: "صوابع أومليت", price: 30}, {id: 22, name: "صوابع أومليت بسطرمة", price: 35},
+                {id: 23, name: "صوابع أومليت بيتزا", price: 40}, {id: 24, name: "صوابع ع مقلية", price: 40}, {id: 25, name: "صوابع بالبيض", price: 25},
+                {id: 26, name: "صوابع كاتشب", price: 20}, {id: 27, name: "صوابع كاتشب مايونيز", price: 22}, {id: 28, name: "صوابع بابا غنوج", price: 25},
+                {id: 29, name: "صوابع جمبري", price: 20}, {id: 30, name: "شيبسي", price: 18}, {id: 31, name: "شيبسي رومي", price: 30},
+                {id: 32, name: "شيبسي بالبيض", price: 25}, {id: 33, name: "شيبسي أومليت", price: 25}, {id: 34, name: "بطاطس بورية", price: 16},
+                {id: 35, name: "بطاطس بورية بالبيض", price: 25}, {id: 36, name: "بطاطس بورية ع جبنة رومي", price: 35}
+            ],
+            "ta3meya-list": [
+                {id: 37, name: "طعمية عادي", price: 15}, {id: 38, name: "طعمية كفتة", price: 15}, {id: 39, name: "طعمية محشية", price: 18},
+                {id: 40, name: "طعمية بالبيض", price: 22}, {id: 41, name: "طعمية ع باذنجان", price: 20}, {id: 42, name: "طعمية ع مسقعة", price: 20},
+                {id: 43, name: "طعمية ع بابا غنوج", price: 20}, {id: 44, name: "طعمية ع بطاطس", price: 24}, {id: 45, name: "طعمية بالبسطرمة", price: 30},
+                {id: 46, name: "طعمية كيري", price: 25}, {id: 47, name: "طعمية ع أمليت", price: 30}, {id: 48, name: "طعمية دوبل", price: 18}, {id: 49, name: "طعمية عين كتكوت", price: 20}
+            ],
+            "omelet-list": [
+                {id: 50, name: "بيض مسلوق", price: 16}, {id: 51, name: "بيض مدحرج", price: 18}, {id: 52, name: "بيض أومليت", price: 20}, {id: 53, name: "أومليت بسطرمة", price: 30},
+                {id: 54, name: "أومليت رومي", price: 30}, {id: 55, name: "أومليت سوسيس", price: 25}, {id: 56, name: "أومليت خضار", price: 25}, {id: 57, name: "أومليت بيتزا", price: 40}, {id: 58, name: "أومليت أباتشي", price: 40}
+            ],
+            "motanaw3-list": [
+                {id: 59, name: "جبنة قريش", price: 18}, {id: 60, name: "جبنة بالبيض", price: 22}, {id: 61, name: "سندوتش باذنجان", price: 15}, {id: 62, name: "سندوتش مسقعة", price: 15},
+                {id: 63, name: "سندوتش بابا غنوج", price: 15}, {id: 64, name: "سندوتش عجة بلدي", price: 20}, {id: 65, name: "سندوتش شكشوكة", price: 15}, {id: 66, name: "ديناميت", price: 35}, {id: 67, name: "سندوتش جبنة مقلية", price: 35}
+            ],
+            "disk-list": [
+                {id: 68, name: "قرص طعمية", price: 3}, {id: 69, name: "قرص سادة كبير", price: 6}, {id: 70, name: "قرص طعمية محشية", price: 8},
+                {id: 71, name: "قرص عجة (صغير)", price: 15}, {id: 72, name: "قرص عجة (كبير)", price: 25}, {id: 73, name: "قرص طعمية كيري", price: 25},
+                {id: 74, name: "قرص أماطي", price: 24}
+            ],
+            "sofra1-list": [
+                {id: 75, name: "طبق فول حار / حلو", price: 55}, {id: 76, name: "طبق طعمية", price: 12}, {id: 77, name: "طبق طعمية محشية", price: 15},
+                {id: 78, name: "طبق بطاطس", price: 25}, {id: 79, name: "طبق مسقعة", price: 20}, {id: 80, name: "طبق شكشوكة مخصوص", price: 25},
+                {id: 81, name: "طبق بابا غنوج", price: 20}, {id: 82, name: "طبق باذنجان", price: 12}, {id: 83, name: "طبق عجة", price: 20}
+            ],
+            "sofra2-list": [
+                {id: 84, name: "طبق أومليت سادة (صغير)", price: 30}, {id: 85, name: "طبق أومليت سادة (كبير)", price: 40},
+                {id: 86, name: "طبق اباتشي (صغير)", price: 35}, {id: 87, name: "طبق اباتشي (كبير)", price: 40},
+                {id: 88, name: "طبق أومليت بسطرمة (صغير)", price: 35}, {id: 89, name: "طبق أومليت بسطرمة (كبير)", price: 40},
+                {id: 90, name: "طبق أومليت خضار (صغير)", price: 30}, {id: 91, name: "طبق أومليت خضار (كبير)", price: 40},
+                {id: 92, name: "طبق مقلية", price: 40}, {id: 93, name: "طبق طحينة (صغير)", price: 20}, {id: 94, name: "طبق طحينة (كبير)", price: 25}
+            ],
+            "elba1-list": [
+                {id: 95, name: "علبة فول سادة (صغير)", price: 25}, {id: 96, name: "علبة فول سادة (كبير)", price: 30},
+                {id: 97, name: "علبة فول زيت زيتون (صغير)", price: 30}, {id: 98, name: "علبة فول زيت زيتون (كبير)", price: 40},
+                {id: 99, name: "علبة فول زيت حار (صغير)", price: 30}, {id: 100, name: "علبة فول زيت حار (كبير)", price: 35},
+                {id: 101, name: "علبة فول الواحة (صغير)", price: 30}, {id: 102, name: "علبة فول الواحة (كبير)", price: 35},
+                {id: 103, name: "علبة فول محوج (صغير)", price: 30}, {id: 104, name: "علبة فول محوج (كبير)", price: 35},
+                {id: 105, name: "علبة فول اسكندراني (صغير)", price: 35}, {id: 106, name: "علبة فول اسكندراني (كبير)", price: 40},
+                {id: 107, name: "علبة فول بالبسطرمة (صغير)", price: 40}, {id: 108, name: "علبة فول بالبسطرمة (كبير)", price: 50},
+                {id: 109, name: "علبة فول بالصلصة (صغير)", price: 30}, {id: 110, name: "علبة فول بالصلصة (كبير)", price: 35}
+            ],
+            "elba2-list": [
+                {id: 111, name: "عجينة علبة (صغير)", price: 15}, {id: 112, name: "عجينة علبة (كبير)", price: 20},
+                {id: 113, name: "مسقعة علبة (صغير)", price: 25}, {id: 114, name: "مسقعة علبة (كبير)", price: 32},
+                {id: 115, name: "جبنة قريش علبة (صغير)", price: 30}, {id: 116, name: "جبنة قريش علبة (كبير)", price: 35},
+                {id: 117, name: "بورية علبة (صغير)", price: 25}, {id: 118, name: "بورية علبة (كبير)", price: 35},
+                {id: 119, name: "باذنجان علبة (صغير)", price: 10}, {id: 120, name: "باذنجان علبة (كبير)", price: 15},
+                {id: 121, name: "شكشوكة علبة (صغير)", price: 25}, {id: 122, name: "شكشوكة علبة (كبير)", price: 35},
+                {id: 123, name: "باكيت بطاطس صوابع (صغير)", price: 25}, {id: 124, name: "باكيت بطاطس صوابع (كبير)", price: 40},
+                {id: 125, name: "باكيت شيبسي (صغير)", price: 20}, {id: 126, name: "باكيت شيبسي (كبير)", price: 30},
+                {id: 127, name: "باكيت بطاطس جمبري (صغير)", price: 25}, {id: 128, name: "باكيت بطاطس جمبري (كبير)", price: 40}
+            ],
+            "salads-list": [
+                {id: 129, name: "سلطة بلدي (صغير)", price: 10}, {id: 130, name: "سلطة بلدي (كبير)", price: 15},
+                {id: 131, name: "طبق مخلل مخصوص (صغير)", price: 10}, {id: 132, name: "طبق مخلل مخصوص (كبير)", price: 13},
+                {id: 133, name: "طرشي (صغير)", price: 5}, {id: 134, name: "طرشي (كبير)", price: 15},
+                {id: 135, name: "بابا غنوج (صغير)", price: 15}, {id: 136, name: "بابا غنوج (كبير)", price: 20},
+                {id: 137, name: "طحينة (صغير)", price: 10}, {id: 138, name: "طحينة (كبير)", price: 15},
+                {id: 139, name: "رغيف عيش بلدي", price: 3.5}, {id: 140, name: "رغيف عيش شامي", price: 2},
+                {id: 141, name: "كانز كبيرة", price: 20}, {id: 142, name: "مياة معدنية", price: 10}
+            ]
+        };
+
+        // دالة طباعة الأقسام بطريقة آمنة
+        for (let listId in menuData) {
+            let container = document.getElementById(listId);
+            if (container) {
+                let htmlContent = '';
+                menuData[listId].forEach(item => {
+                    htmlContent += `
+                        <div class="item" data-id="${item.id}" data-name="${item.name}" data-price="${item.price}">
+                            <div class="item-info">
+                                <span class="item-name">${item.name}</span>
+                                <span class="item-price">${item.price} ج</span>
+                            </div>
+                            <div class="quantity-control">
+                                <button onclick="updateQty(${item.id}, 1)">+</button>
+                                <span id="qty-${item.id}">0</span>
+                                <button onclick="updateQty(${item.id}, -1)">-</button>
+                            </div>
+                        </div>
+                    `;
+                });
+                container.innerHTML = htmlContent;
+            }
+        }
+
+        // --- نظام التحكم والتقليب ---
         let cart = {};
         let currentPage = 0;
-        const totalPages = 6; 
+        const totalPages = 10; 
         
-        /* تقدر تغير سعر التوصيل من هنا بسهولة */
         const DELIVERY_FEE = 15; 
         let currentSubTotal = 0;
 
@@ -432,6 +429,7 @@
             }
         });
 
+        // --- نظام السلة والفاتورة ---
         function updateQty(id, change) {
             let itemElement = document.querySelector(`.item[data-id="${id}"]`);
             let name = itemElement.getAttribute('data-name');
@@ -483,7 +481,6 @@
 
         function closeCart() { document.getElementById('cartModal').style.display = 'none'; }
 
-        /* دالة تحديث الفاتورة بناءً على التوصيل أو الصالة */
         function updateInvoice() {
             let orderType = document.querySelector('input[name="orderType"]:checked').value;
             let deliveryRow = document.getElementById('deliveryRow');
@@ -546,7 +543,7 @@
                 message += `*الإجمالي النهائي:* ${currentSubTotal} ج\n`;
             }
 
-            let whatsappNumber = "201013606635"; 
+            let whatsappNumber = "201154188441"; 
             let encodedMessage = encodeURIComponent(message);
             window.open(`https://wa.me/${whatsappNumber}?text=${encodedMessage}`, '_blank');
         }
