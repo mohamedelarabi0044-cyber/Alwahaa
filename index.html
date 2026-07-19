@@ -49,12 +49,14 @@
         .category { background: #fff; border-radius: 12px; padding: 15px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); border: 1px solid #eee; }
         .category-title { color: #a81c1c; border-bottom: 2px solid #f4f4f4; padding-bottom: 10px; margin-top: 0; margin-bottom: 15px; font-size: 22px; font-weight: bold; text-align: center; }
         
-        .item { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px dashed #e0e0e0; padding-bottom: 8px; margin-bottom: 12px; }
+        .item { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px dashed #e0e0e0; padding-bottom: 10px; margin-bottom: 12px; }
         .item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
         .item-info { flex: 1; display: flex; flex-direction: column; }
-        .item-name { font-weight: 600; font-size: 15px; color: #2c3e50; }
-        .item-price { color: #27ae60; font-weight: bold; font-size: 13px; margin-top: 3px; }
+        .item-name { font-weight: 600; font-size: 15px; color: #2c3e50; margin-bottom: 4px; }
+        .item-price { color: #27ae60; font-weight: bold; font-size: 14px; }
         
+        .size-select { padding: 4px; border-radius: 5px; border: 1px solid #ccc; font-family: 'Cairo'; font-size: 13px; width: fit-content; background-color: #f9f9f9; color: #a81c1c; font-weight: bold; outline: none; }
+
         .quantity-control { display: flex; align-items: center; gap: 8px; margin-right: 10px; }
         .quantity-control button { background-color: #a81c1c; color: white; border: none; width: 28px; height: 28px; border-radius: 6px; font-size: 18px; font-weight: bold; cursor: pointer; display: flex; justify-content: center; align-items: center; }
         .quantity-control span { font-weight: bold; font-size: 16px; width: 20px; text-align: center; }
@@ -102,6 +104,7 @@
 </head>
 <body>
 
+    <!-- الصفحة 0: الغلاف -->
     <div class="page cover-page active" id="page-0">
         <div class="cover-content">
             <h1>الواحة</h1>
@@ -110,122 +113,69 @@
         </div>
     </div>
 
+    <!-- الهيدر -->
     <div class="header" id="main-header">
         <h1>فول وفلافل الواحة</h1>
     </div>
 
     <div class="container">
         
-        <!-- الصفحة 1: الفول -->
+        <!-- الصفحات من 1 لـ 10، كل صفحة فيها الأقسام بتاعتها -->
         <div class="page" id="page-1">
-            <div class="category">
-                <h2 class="category-title">سندوتشات الفول</h2>
-                <div id="foul-list"></div>
-            </div>
+            <div class="category"><h2 class="category-title">سندوتشات الفول</h2><div id="foul-list"></div></div>
         </div>
-
-        <!-- الصفحة 2: البطاطس -->
         <div class="page" id="page-2">
-            <div class="category">
-                <h2 class="category-title">سندوتشات البطاطس</h2>
-                <div id="batates-list"></div>
-            </div>
+            <div class="category"><h2 class="category-title">سندوتشات البطاطس</h2><div id="batates-list"></div></div>
         </div>
-
-        <!-- الصفحة 3: الطعمية -->
         <div class="page" id="page-3">
-            <div class="category">
-                <h2 class="category-title">سندوتشات الطعمية</h2>
-                <div id="ta3meya-list"></div>
-            </div>
+            <div class="category"><h2 class="category-title">سندوتشات الطعمية</h2><div id="ta3meya-list"></div></div>
         </div>
-
-        <!-- الصفحة 4: الأومليت والمتنوع -->
         <div class="page" id="page-4">
-            <div class="category">
-                <h2 class="category-title">سندوتشات الأومليت</h2>
-                <div id="omelet-list"></div>
-            </div>
-            <div class="category">
-                <h2 class="category-title">سندوتشات متنوع</h2>
-                <div id="motanaw3-list"></div>
-            </div>
+            <div class="category"><h2 class="category-title">سندوتشات الأومليت</h2><div id="omelet-list"></div></div>
+            <div class="category"><h2 class="category-title">سندوتشات متنوع</h2><div id="motanaw3-list"></div></div>
         </div>
-
-        <!-- الصفحة 5: أقراص الطعمية -->
         <div class="page" id="page-5">
-            <div class="category">
-                <h2 class="category-title">أقراص الطعمية</h2>
-                <div id="disk-list"></div>
-            </div>
+            <div class="category"><h2 class="category-title">أقراص الطعمية</h2><div id="disk-list"></div></div>
         </div>
-
-        <!-- الصفحة 6: سفرة الواحة 1 -->
         <div class="page" id="page-6">
-            <div class="category">
-                <h2 class="category-title">سفره الواحة (أطباق)</h2>
-                <div id="sofra1-list"></div>
-            </div>
+            <div class="category"><h2 class="category-title">سفره الواحة (أطباق)</h2><div id="sofra1-list"></div></div>
         </div>
-
-        <!-- الصفحة 7: سفرة الواحة 2 -->
         <div class="page" id="page-7">
-            <div class="category">
-                <h2 class="category-title">سفره الواحة (إضافات)</h2>
-                <div id="sofra2-list"></div>
-            </div>
+            <div class="category"><h2 class="category-title">سفره الواحة (إضافات)</h2><div id="sofra2-list"></div></div>
         </div>
-
-        <!-- الصفحة 8: ركن العلب 1 -->
         <div class="page" id="page-8">
-            <div class="category">
-                <h2 class="category-title">ركن العلب (فول)</h2>
-                <div id="elba1-list"></div>
-            </div>
+            <div class="category"><h2 class="category-title">ركن العلب (فول)</h2><div id="elba1-list"></div></div>
         </div>
-
-        <!-- الصفحة 9: ركن العلب 2 -->
         <div class="page" id="page-9">
-            <div class="category">
-                <h2 class="category-title">ركن العلب (إضافات)</h2>
-                <div id="elba2-list"></div>
-            </div>
+            <div class="category"><h2 class="category-title">ركن العلب (إضافات)</h2><div id="elba2-list"></div></div>
         </div>
-
-        <!-- الصفحة 10: السلطات والمشروبات والملاحظات -->
         <div class="page" id="page-10">
-            <div class="category">
-                <h2 class="category-title">السلطات والمشروبات</h2>
-                <div id="salads-list"></div>
-            </div>
+            <div class="category"><h2 class="category-title">السلطات والمشروبات</h2><div id="salads-list"></div></div>
             
             <div class="notes">
                 <p>جميع السندوتشات (بلدي - شامي - فينو)</p>
                 <p>إضافة سلطة بلدي أو طرنشات على السندوتش يتم إضافة 3 ج</p>
                 <p>11 شارع النزهة ناصية تاج الدين السبكي</p>
                 <span class="phones">للتوصيل: <span dir="ltr">01154188441 - 0224178052</span></span>
-                <span class="phones">للتوصيل: <span dir="ltr">01283156131 - 01070341501</span></span>
-                <span class="phones">للتوصيل: <span dir="ltr">01128964794 - 01155192984</span></span>
                 <p class="instapay">يوجد انستا باي وكاش علي (01154188441)</p>
             </div>
         </div>
 
     </div>
 
-    <!-- السلة العائمة -->
+    <!-- السلة العائمة والتقليب -->
     <div class="floating-cart" id="floatingCart" onclick="openCart()">
         <h3>السلة (<span id="cartCount">0</span>)</h3>
         <span>تأكيد الطلب ➔</span>
     </div>
 
-    <!-- شريط التقليب -->
     <div class="pagination" id="pagination">
         <button onclick="nextPage()" id="nextBtn">التالي</button>
         <span class="page-indicator" id="pageIndicator">1 / 10</span>
         <button onclick="prevPage()" id="prevBtn">السابق</button>
     </div>
 
-    <!-- نافذة الطلب ونظام الفاتورة -->
+    <!-- نافذة تأكيد الطلب -->
     <div class="cart-modal" id="cartModal">
         <div class="cart-content">
             <div class="cart-header">
@@ -235,23 +185,12 @@
             
             <div class="cart-items-list" id="cartItemsList"></div>
             
-            <!-- نظام الفاتورة -->
             <div class="invoice-box">
-                <div class="invoice-row">
-                    <span>سعر الطلبات:</span>
-                    <span id="subTotal">0 ج</span>
-                </div>
-                <div class="invoice-row" id="deliveryRow">
-                    <span>خدمة التوصيل:</span>
-                    <span id="deliveryFeeText">15 ج</span>
-                </div>
-                <div class="total-row">
-                    <span>الإجمالي النهائي:</span>
-                    <span id="finalTotal">0 ج</span>
-                </div>
+                <div class="invoice-row"><span>سعر الطلبات:</span><span id="subTotal">0 ج</span></div>
+                <div class="invoice-row" id="deliveryRow"><span>خدمة التوصيل:</span><span id="deliveryFeeText">15 ج</span></div>
+                <div class="total-row"><span>الإجمالي النهائي:</span><span id="finalTotal">0 ج</span></div>
             </div>
 
-            <!-- نوع الطلب -->
             <div class="order-type-group">
                 <label><input type="radio" name="orderType" value="delivery" checked onchange="updateInvoice()"> دليفري توصيل</label>
                 <label><input type="radio" name="orderType" value="dinein" onchange="updateInvoice()"> صالة / تيك أواي</label>
@@ -270,15 +209,13 @@
                 <input type="text" id="custAddress" class="table-input" placeholder="الشارع، العمارة، الدور..." required>
             </div>
 
-            <button class="send-whatsapp-btn" onclick="sendOrder()">
-                إرسال الطلب عبر واتساب 💬
-            </button>
+            <button class="send-whatsapp-btn" onclick="sendOrder()">إرسال الطلب عبر واتساب 💬</button>
         </div>
     </div>
 
-    <!-- برمجة المنيو وإضافة البيانات -->
+    <!-- البرمجة والبيانات -->
     <script>
-        // تعريف الأقسام والمنتجات
+        // تعريف المنيو (مع دمج الأحجام في قائمة واحدة باستخدام sizes)
         const menuData = {
             "foul-list": [
                 {id: 1, name: "فول الواحة", price: 15}, {id: 2, name: "فول زيت حار", price: 16}, {id: 3, name: "فول زيت زيتون", price: 16},
@@ -312,8 +249,8 @@
             ],
             "disk-list": [
                 {id: 68, name: "قرص طعمية", price: 3}, {id: 69, name: "قرص سادة كبير", price: 6}, {id: 70, name: "قرص طعمية محشية", price: 8},
-                {id: 71, name: "قرص عجة (صغير)", price: 15}, {id: 72, name: "قرص عجة (كبير)", price: 25}, {id: 73, name: "قرص طعمية كيري", price: 25},
-                {id: 74, name: "قرص أماطي", price: 24}
+                {id: 71, name: "قرص عجة", sizes: [{name: "صغير", price: 15}, {name: "كبير", price: 25}]}, 
+                {id: 73, name: "قرص طعمية كيري", price: 25}, {id: 74, name: "قرص أماطي", price: 24}
             ],
             "sofra1-list": [
                 {id: 75, name: "طبق فول حار / حلو", price: 55}, {id: 76, name: "طبق طعمية", price: 12}, {id: 77, name: "طبق طعمية محشية", price: 15},
@@ -321,73 +258,92 @@
                 {id: 81, name: "طبق بابا غنوج", price: 20}, {id: 82, name: "طبق باذنجان", price: 12}, {id: 83, name: "طبق عجة", price: 20}
             ],
             "sofra2-list": [
-                {id: 84, name: "طبق أومليت سادة (صغير)", price: 30}, {id: 85, name: "طبق أومليت سادة (كبير)", price: 40},
-                {id: 86, name: "طبق اباتشي (صغير)", price: 35}, {id: 87, name: "طبق اباتشي (كبير)", price: 40},
-                {id: 88, name: "طبق أومليت بسطرمة (صغير)", price: 35}, {id: 89, name: "طبق أومليت بسطرمة (كبير)", price: 40},
-                {id: 90, name: "طبق أومليت خضار (صغير)", price: 30}, {id: 91, name: "طبق أومليت خضار (كبير)", price: 40},
-                {id: 92, name: "طبق مقلية", price: 40}, {id: 93, name: "طبق طحينة (صغير)", price: 20}, {id: 94, name: "طبق طحينة (كبير)", price: 25}
+                {id: 84, name: "طبق أومليت سادة", sizes: [{name: "صغير", price: 30}, {name: "كبير", price: 40}]},
+                {id: 85, name: "طبق اباتشي", sizes: [{name: "صغير", price: 35}, {name: "كبير", price: 40}]},
+                {id: 86, name: "طبق أومليت بسطرمة", sizes: [{name: "صغير", price: 35}, {name: "كبير", price: 40}]},
+                {id: 87, name: "طبق أومليت خضار", sizes: [{name: "صغير", price: 30}, {name: "كبير", price: 40}]},
+                {id: 88, name: "طبق طحينة", sizes: [{name: "صغير", price: 20}, {name: "كبير", price: 25}]},
+                {id: 89, name: "طبق مقلية", price: 40}
             ],
             "elba1-list": [
-                {id: 95, name: "علبة فول سادة (صغير)", price: 25}, {id: 96, name: "علبة فول سادة (كبير)", price: 30},
-                {id: 97, name: "علبة فول زيت زيتون (صغير)", price: 30}, {id: 98, name: "علبة فول زيت زيتون (كبير)", price: 40},
-                {id: 99, name: "علبة فول زيت حار (صغير)", price: 30}, {id: 100, name: "علبة فول زيت حار (كبير)", price: 35},
-                {id: 101, name: "علبة فول الواحة (صغير)", price: 30}, {id: 102, name: "علبة فول الواحة (كبير)", price: 35},
-                {id: 103, name: "علبة فول محوج (صغير)", price: 30}, {id: 104, name: "علبة فول محوج (كبير)", price: 35},
-                {id: 105, name: "علبة فول اسكندراني (صغير)", price: 35}, {id: 106, name: "علبة فول اسكندراني (كبير)", price: 40},
-                {id: 107, name: "علبة فول بالبسطرمة (صغير)", price: 40}, {id: 108, name: "علبة فول بالبسطرمة (كبير)", price: 50},
-                {id: 109, name: "علبة فول بالصلصة (صغير)", price: 30}, {id: 110, name: "علبة فول بالصلصة (كبير)", price: 35}
+                {id: 90, name: "علبة فول سادة", sizes: [{name: "صغير", price: 25}, {name: "كبير", price: 30}]},
+                {id: 91, name: "علبة فول زيت زيتون", sizes: [{name: "صغير", price: 30}, {name: "كبير", price: 40}]},
+                {id: 92, name: "علبة فول زيت حار", sizes: [{name: "صغير", price: 30}, {name: "كبير", price: 35}]},
+                {id: 93, name: "علبة فول الواحة", sizes: [{name: "صغير", price: 30}, {name: "كبير", price: 35}]},
+                {id: 94, name: "علبة فول محوج", sizes: [{name: "صغير", price: 30}, {name: "كبير", price: 35}]},
+                {id: 95, name: "علبة فول اسكندراني", sizes: [{name: "صغير", price: 35}, {name: "كبير", price: 40}]},
+                {id: 96, name: "علبة فول بالبيض", sizes: [{name: "صغير", price: 38}, {name: "كبير", price: 45}]},
+                {id: 97, name: "علبة فول أومليت", sizes: [{name: "صغير", price: 38}, {name: "كبير", price: 45}]},
+                {id: 98, name: "علبة فول بالبسطرمة", sizes: [{name: "صغير", price: 40}, {name: "كبير", price: 50}]},
+                {id: 99, name: "علبة فول بالصلصة", sizes: [{name: "صغير", price: 30}, {name: "كبير", price: 35}]}
             ],
             "elba2-list": [
-                {id: 111, name: "عجينة علبة (صغير)", price: 15}, {id: 112, name: "عجينة علبة (كبير)", price: 20},
-                {id: 113, name: "مسقعة علبة (صغير)", price: 25}, {id: 114, name: "مسقعة علبة (كبير)", price: 32},
-                {id: 115, name: "جبنة قريش علبة (صغير)", price: 30}, {id: 116, name: "جبنة قريش علبة (كبير)", price: 35},
-                {id: 117, name: "بورية علبة (صغير)", price: 25}, {id: 118, name: "بورية علبة (كبير)", price: 35},
-                {id: 119, name: "باذنجان علبة (صغير)", price: 10}, {id: 120, name: "باذنجان علبة (كبير)", price: 15},
-                {id: 121, name: "شكشوكة علبة (صغير)", price: 25}, {id: 122, name: "شكشوكة علبة (كبير)", price: 35},
-                {id: 123, name: "باكيت بطاطس صوابع (صغير)", price: 25}, {id: 124, name: "باكيت بطاطس صوابع (كبير)", price: 40},
-                {id: 125, name: "باكيت شيبسي (صغير)", price: 20}, {id: 126, name: "باكيت شيبسي (كبير)", price: 30},
-                {id: 127, name: "باكيت بطاطس جمبري (صغير)", price: 25}, {id: 128, name: "باكيت بطاطس جمبري (كبير)", price: 40}
+                {id: 100, name: "عجينة علبة", sizes: [{name: "صغير", price: 15}, {name: "كبير", price: 20}]},
+                {id: 101, name: "مسقعة علبة", sizes: [{name: "صغير", price: 25}, {name: "كبير", price: 32}]},
+                {id: 102, name: "جبنة قريش علبة", sizes: [{name: "صغير", price: 30}, {name: "كبير", price: 35}]},
+                {id: 103, name: "بورية علبة", sizes: [{name: "صغير", price: 25}, {name: "كبير", price: 35}]},
+                {id: 104, name: "باذنجان علبة", sizes: [{name: "صغير", price: 10}, {name: "كبير", price: 15}]},
+                {id: 105, name: "شكشوكة علبة", sizes: [{name: "صغير", price: 25}, {name: "كبير", price: 35}]},
+                {id: 106, name: "باكيت بطاطس صوابع", sizes: [{name: "صغير", price: 25}, {name: "وسط", price: 30}, {name: "كبير", price: 40}]},
+                {id: 107, name: "باكيت شيبسي", sizes: [{name: "صغير", price: 20}, {name: "وسط", price: 25}, {name: "كبير", price: 30}]},
+                {id: 108, name: "باكيت بطاطس جمبري", sizes: [{name: "صغير", price: 25}, {name: "وسط", price: 30}, {name: "كبير", price: 40}]}
             ],
             "salads-list": [
-                {id: 129, name: "سلطة بلدي (صغير)", price: 10}, {id: 130, name: "سلطة بلدي (كبير)", price: 15},
-                {id: 131, name: "طبق مخلل مخصوص (صغير)", price: 10}, {id: 132, name: "طبق مخلل مخصوص (كبير)", price: 13},
-                {id: 133, name: "طرشي (صغير)", price: 5}, {id: 134, name: "طرشي (كبير)", price: 15},
-                {id: 135, name: "بابا غنوج (صغير)", price: 15}, {id: 136, name: "بابا غنوج (كبير)", price: 20},
-                {id: 137, name: "طحينة (صغير)", price: 10}, {id: 138, name: "طحينة (كبير)", price: 15},
-                {id: 139, name: "رغيف عيش بلدي", price: 3.5}, {id: 140, name: "رغيف عيش شامي", price: 2},
-                {id: 141, name: "كانز كبيرة", price: 20}, {id: 142, name: "مياة معدنية", price: 10}
+                {id: 109, name: "سلطة بلدي", sizes: [{name: "صغير", price: 10}, {name: "كبير", price: 15}]},
+                {id: 110, name: "طبق مخلل مخصوص", sizes: [{name: "صغير", price: 10}, {name: "كبير", price: 13}]},
+                {id: 111, name: "طرشي", sizes: [{name: "صغير", price: 5}, {name: "وسط", price: 10}, {name: "كبير", price: 15}]},
+                {id: 112, name: "بابا غنوج", sizes: [{name: "صغير", price: 15}, {name: "كبير", price: 20}]},
+                {id: 113, name: "طحينة", sizes: [{name: "صغير", price: 10}, {name: "كبير", price: 15}]},
+                {id: 114, name: "رغيف عيش بلدي", price: 3.5}, {id: 115, name: "رغيف عيش شامي", price: 2},
+                {id: 116, name: "كانز كبيرة", price: 20}, {id: 117, name: "مياة معدنية", price: 10}
             ]
         };
 
-        // دالة طباعة الأقسام بطريقة آمنة
+        // توليد الـ HTML للأصناف بذكاء (مع أو بدون أحجام)
         for (let listId in menuData) {
             let container = document.getElementById(listId);
             if (container) {
                 let htmlContent = '';
                 menuData[listId].forEach(item => {
-                    htmlContent += `
-                        <div class="item" data-id="${item.id}" data-name="${item.name}" data-price="${item.price}">
-                            <div class="item-info">
-                                <span class="item-name">${item.name}</span>
-                                <span class="item-price">${item.price} ج</span>
+                    if (item.sizes) {
+                        let optionsHtml = item.sizes.map(s => `<option value="${s.name}|${s.price}">${s.name} - ${s.price} ج</option>`).join('');
+                        htmlContent += `
+                            <div class="item">
+                                <div class="item-info">
+                                    <span class="item-name">${item.name}</span>
+                                    <select id="size-${item.id}" class="size-select" onchange="refreshQty(${item.id})">${optionsHtml}</select>
+                                </div>
+                                <div class="quantity-control">
+                                    <button onclick="addSizedToCart(${item.id}, '${item.name}', 1)">+</button>
+                                    <span id="qty-${item.id}">0</span>
+                                    <button onclick="addSizedToCart(${item.id}, '${item.name}', -1)">-</button>
+                                </div>
                             </div>
-                            <div class="quantity-control">
-                                <button onclick="updateQty(${item.id}, 1)">+</button>
-                                <span id="qty-${item.id}">0</span>
-                                <button onclick="updateQty(${item.id}, -1)">-</button>
+                        `;
+                    } else {
+                        htmlContent += `
+                            <div class="item">
+                                <div class="item-info">
+                                    <span class="item-name">${item.name}</span>
+                                    <span class="item-price">${item.price} ج</span>
+                                </div>
+                                <div class="quantity-control">
+                                    <button onclick="addToCart(${item.id}, '${item.name}', '', ${item.price}, 1)">+</button>
+                                    <span id="qty-${item.id}">0</span>
+                                    <button onclick="addToCart(${item.id}, '${item.name}', '', ${item.price}, -1)">-</button>
+                                </div>
                             </div>
-                        </div>
-                    `;
+                        `;
+                    }
                 });
                 container.innerHTML = htmlContent;
             }
         }
 
-        // --- نظام التحكم والتقليب ---
+        // --- التحكم والتقليب ---
         let cart = {};
         let currentPage = 0;
         const totalPages = 10; 
-        
         const DELIVERY_FEE = 15; 
         let currentSubTotal = 0;
 
@@ -396,22 +352,15 @@
                 page.classList.remove('active');
                 if (index === currentPage) page.classList.add('active');
             });
-
             const pagination = document.getElementById('pagination');
             const header = document.getElementById('main-header');
-            const prevBtn = document.getElementById('prevBtn');
-            const nextBtn = document.getElementById('nextBtn');
-            const indicator = document.getElementById('pageIndicator');
-
             if (currentPage === 0) {
-                pagination.style.display = 'none';
-                header.style.display = 'none';
+                pagination.style.display = 'none'; header.style.display = 'none';
             } else {
-                pagination.style.display = 'flex';
-                header.style.display = 'block';
-                indicator.innerText = currentPage + " / " + totalPages;
-                prevBtn.disabled = currentPage === 1;
-                nextBtn.disabled = currentPage === totalPages;
+                pagination.style.display = 'flex'; header.style.display = 'block';
+                document.getElementById('pageIndicator').innerText = currentPage + " / " + totalPages;
+                document.getElementById('prevBtn').disabled = currentPage === 1;
+                document.getElementById('nextBtn').disabled = currentPage === totalPages;
             }
             window.scrollTo(0, 0);
         }
@@ -429,52 +378,57 @@
             }
         });
 
-        // --- نظام السلة والفاتورة ---
-        function updateQty(id, change) {
-            let itemElement = document.querySelector(`.item[data-id="${id}"]`);
-            let name = itemElement.getAttribute('data-name');
-            let price = parseFloat(itemElement.getAttribute('data-price'));
+        // --- نظام السلة الجديد ---
+        function addSizedToCart(id, baseName, change) {
+            let select = document.getElementById(`size-${id}`);
+            let val = select.value.split('|');
+            addToCart(id, baseName, val[0], parseFloat(val[1]), change);
+        }
+
+        function addToCart(id, name, size, price, change) {
+            let key = id + (size ? '_' + size : '');
+            if (!cart[key]) {
+                let fullName = size ? `${name} (${size})` : name;
+                cart[key] = { id: id, size: size, name: fullName, price: price, qty: 0 };
+            }
+            cart[key].qty += change;
+            if (cart[key].qty <= 0) delete cart[key];
             
-            if (!cart[id]) cart[id] = { name: name, price: price, qty: 0 };
-            cart[id].qty += change;
-            
-            if (cart[id].qty <= 0) { cart[id].qty = 0; delete cart[id]; }
-            
-            document.getElementById(`qty-${id}`).innerText = cart[id] ? cart[id].qty : 0;
+            refreshQty(id, size);
             updateCartUI();
+        }
+
+        function refreshQty(id) {
+            let select = document.getElementById(`size-${id}`);
+            let size = select ? select.value.split('|')[0] : '';
+            let key = id + (size ? '_' + size : '');
+            let qty = cart[key] ? cart[key].qty : 0;
+            document.getElementById(`qty-${id}`).innerText = qty;
         }
 
         function updateCartUI() {
             let totalQty = 0;
-            for (let id in cart) totalQty += cart[id].qty;
-            
+            for (let key in cart) totalQty += cart[key].qty;
             document.getElementById('cartCount').innerText = totalQty;
             let floatingCart = document.getElementById('floatingCart');
-            
-            if (totalQty > 0) {
-                floatingCart.style.display = 'flex';
-            } else {
-                floatingCart.style.display = 'none';
-                closeCart();
-            }
+            if (totalQty > 0) floatingCart.style.display = 'flex';
+            else { floatingCart.style.display = 'none'; closeCart(); }
         }
 
         function openCart() {
             let cartItemsList = document.getElementById('cartItemsList');
             cartItemsList.innerHTML = '';
             currentSubTotal = 0;
-
-            for (let id in cart) {
-                let itemTotal = cart[id].qty * cart[id].price;
+            for (let key in cart) {
+                let itemTotal = cart[key].qty * cart[key].price;
                 currentSubTotal += itemTotal;
                 cartItemsList.innerHTML += `
                     <div class="cart-item-row">
-                        <span>${cart[id].qty}x ${cart[id].name}</span>
+                        <span>${cart[key].qty}x ${cart[key].name}</span>
                         <span>${itemTotal} ج</span>
                     </div>
                 `;
             }
-            
             updateInvoice();
             document.getElementById('cartModal').style.display = 'flex';
         }
@@ -484,26 +438,21 @@
         function updateInvoice() {
             let orderType = document.querySelector('input[name="orderType"]:checked').value;
             let deliveryRow = document.getElementById('deliveryRow');
-            let finalTotalElem = document.getElementById('finalTotal');
-            let addressLabel = document.getElementById('addressLabel');
-            let addressInput = document.getElementById('custAddress');
-
             document.getElementById('subTotal').innerText = currentSubTotal + ' ج';
-
             if (orderType === 'delivery') {
                 deliveryRow.style.display = 'flex';
-                document.getElementById('deliveryFeeText').innerText = DELIVERY_FEE + ' ج';
-                finalTotalElem.innerText = (currentSubTotal + DELIVERY_FEE) + ' ج';
-                addressLabel.innerText = 'العنوان تفصيلاً:';
-                addressInput.placeholder = 'الشارع، العمارة، الدور...';
+                document.getElementById('finalTotal').innerText = (currentSubTotal + DELIVERY_FEE) + ' ج';
+                document.getElementById('addressLabel').innerText = 'العنوان تفصيلاً:';
+                document.getElementById('custAddress').placeholder = 'الشارع، العمارة، الدور...';
             } else {
                 deliveryRow.style.display = 'none';
-                finalTotalElem.innerText = currentSubTotal + ' ج';
-                addressLabel.innerText = 'رقم الترابيزة:';
-                addressInput.placeholder = 'اكتب رقم الترابيزة أو تيك أواي';
+                document.getElementById('finalTotal').innerText = currentSubTotal + ' ج';
+                document.getElementById('addressLabel').innerText = 'رقم الترابيزة:';
+                document.getElementById('custAddress').placeholder = 'اكتب رقم الترابيزة أو تيك أواي';
             }
         }
 
+        // --- إرسال رسالة الواتساب الاحترافية (Ticket ID) ---
         function sendOrder() {
             let name = document.getElementById('custName').value.trim();
             let phone = document.getElementById('custPhone').value.trim();
@@ -515,37 +464,27 @@
                 return;
             }
 
-            let message = "*طلب جديد من المنيو الديجيتال 🔴* \n\n";
-            message += `*الاسم:* ${name}\n`;
-            message += `*رقم الموبايل:* ${phone}\n`;
+            let ticketId = "WA-" + Math.floor(1000 + Math.random() * 9000);
+
+            let message = `*طلب جديد #${ticketId}* 🔴\n\n`;
+            message += `👤 *العميل:* ${name}\n📱 *الموبايل:* ${phone}\n`;
+            message += `📍 *${orderType === 'delivery' ? 'العنوان' : 'الترابيزة'}:* ${address}\n\n`;
+            message += `📋 *الطلبات:*\n`;
             
-            if (orderType === 'delivery') {
-                message += `*نوع الطلب:* دليفري 🛵\n`;
-                message += `*العنوان:* ${address}\n\n`;
-            } else {
-                message += `*نوع الطلب:* صالة / تيك أواي 🍽️\n`;
-                message += `*رقم الترابيزة:* ${address}\n\n`;
+            for (let key in cart) {
+                let itemTotal = cart[key].qty * cart[key].price;
+                message += `• ${cart[key].qty}x ${cart[key].name} (${itemTotal} ج)\n`;
             }
 
-            message += `*الطلبات:*\n`;
-            
-            for (let id in cart) {
-                let itemTotal = cart[id].qty * cart[id].price;
-                message += `- ${cart[id].qty}x ${cart[id].name} (${itemTotal} ج)\n`;
-            }
+            let delivery = (orderType === 'delivery') ? DELIVERY_FEE : 0;
+            message += `\n💰 *سعر الطلبات:* ${currentSubTotal} ج`;
+            if (delivery > 0) message += `\n🛵 *التوصيل:* ${delivery} ج`;
+            message += `\n------------------\n`;
+            message += `💎 *الإجمالي النهائي:* ${currentSubTotal + delivery} ج\n`;
+            message += `✅ *رقم الطلب للمتابعة:* ${ticketId}`;
 
-            message += `\n*سعر الطلبات:* ${currentSubTotal} ج\n`;
-            
-            if (orderType === 'delivery') {
-                message += `*خدمة التوصيل:* ${DELIVERY_FEE} ج\n`;
-                message += `*الإجمالي النهائي:* ${currentSubTotal + DELIVERY_FEE} ج\n`;
-            } else {
-                message += `*الإجمالي النهائي:* ${currentSubTotal} ج\n`;
-            }
-
-            let whatsappNumber = "201154188441"; 
-            let encodedMessage = encodeURIComponent(message);
-            window.open(`https://wa.me/${whatsappNumber}?text=${encodedMessage}`, '_blank');
+            let whatsappNumber = "201013606635"; 
+            window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`, '_blank');
         }
     </script>
 </body>
