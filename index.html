@@ -12,7 +12,7 @@
             background-color: #fdfbf7;
             margin: 0; padding: 0; color: #333;
             overflow-x: hidden;
-            padding-bottom: 120px; /* مساحة للسلة والتقليب */
+            padding-bottom: 120px; 
         }
         
         /* واجهة الغلاف الفخمة */
@@ -55,12 +55,10 @@
         .item-name { font-weight: 600; font-size: 15px; color: #2c3e50; }
         .item-price { color: #27ae60; font-weight: bold; font-size: 13px; margin-top: 3px; }
         
-        /* أزرار الكمية */
         .quantity-control { display: flex; align-items: center; gap: 8px; margin-right: 10px; }
         .quantity-control button { background-color: #a81c1c; color: white; border: none; width: 28px; height: 28px; border-radius: 6px; font-size: 18px; font-weight: bold; cursor: pointer; display: flex; justify-content: center; align-items: center; }
         .quantity-control span { font-weight: bold; font-size: 16px; width: 20px; text-align: center; }
 
-        /* شريط التنقل بين الصفحات */
         .pagination {
             position: fixed; bottom: 0; left: 0; right: 0; background: #fff; padding: 10px 20px;
             display: none; justify-content: space-between; align-items: center; box-shadow: 0 -2px 10px rgba(0,0,0,0.1); z-index: 1000;
@@ -69,7 +67,6 @@
         .pagination button:disabled { background-color: #ccc; cursor: not-allowed; }
         .page-indicator { font-weight: bold; color: #555; font-size: 15px; }
 
-        /* السلة العائمة */
         .floating-cart {
             position: fixed; bottom: 55px; left: 10px; right: 10px; background-color: #27ae60; color: white;
             padding: 12px 20px; border-radius: 12px; display: flex; justify-content: space-between; align-items: center;
@@ -78,30 +75,34 @@
         .floating-cart h3 { margin: 0; font-size: 16px; }
         .floating-cart span { font-weight: bold; font-size: 16px; }
 
-        /* نافذة الطلب */
         .cart-modal { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.7); z-index: 2000; justify-content: center; align-items: center; padding: 15px; }
         .cart-content { background: #fff; width: 100%; max-width: 450px; border-radius: 15px; padding: 20px; max-height: 90vh; overflow-y: auto; }
         .cart-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #eee; padding-bottom: 10px; margin-bottom: 15px; }
         .cart-header h2 { margin: 0; color: #a81c1c; font-size: 20px; }
         .close-btn { background: none; border: none; font-size: 28px; color: #777; cursor: pointer; line-height: 1; }
+        
         .cart-item-row { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 15px; border-bottom: 1px dashed #eee; padding-bottom: 5px; }
-        .total-row { display: flex; justify-content: space-between; font-weight: bold; font-size: 18px; color: #27ae60; border-top: 2px solid #eee; padding-top: 15px; margin-bottom: 15px; }
+        
+        /* تنسيق نظام الفاتورة */
+        .invoice-box { background: #f9f9f9; padding: 15px; border-radius: 8px; border: 1px solid #ddd; margin-bottom: 15px; }
+        .invoice-row { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 15px; color: #555; }
+        .total-row { display: flex; justify-content: space-between; font-weight: bold; font-size: 18px; color: #a81c1c; border-top: 2px solid #ddd; padding-top: 10px; margin-top: 5px; }
         
         .input-group { margin-bottom: 12px; }
-        .input-group label { display: block; font-size: 14px; font-weight: bold; color: #555; margin-bottom: 5px; }
+        .input-group label { display: block; font-size: 14px; font-weight: bold; color: #333; margin-bottom: 5px; }
         .table-input { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 8px; font-family: 'Cairo'; font-size: 14px; box-sizing: border-box; }
+        
+        .order-type-group { display: flex; gap: 15px; background: #eee; padding: 10px; border-radius: 8px; margin-bottom: 15px; }
+        .order-type-group label { font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 5px; font-size: 14px; }
         
         .send-whatsapp-btn { background-color: #25D366; color: white; border: none; width: 100%; padding: 12px; border-radius: 8px; font-weight: bold; font-size: 18px; cursor: pointer; margin-top: 10px; }
         
         .notes { text-align: center; font-size: 14px; color: #555; padding: 15px; background: #f4f4f4; border-radius: 10px; border: 1px dashed #ccc; }
         .notes p { margin: 5px 0; font-weight: bold; }
-        .phones { color: #a81c1c; font-size: 16px; display: block; margin-top: 10px; font-weight: bold; }
-        .instapay { margin-top: 15px; color: #27ae60; font-weight: bold; font-size: 16px; }
     </style>
 </head>
 <body>
 
-    <!-- الصفحة 0: الغلاف -->
     <div class="page cover-page active" id="page-0">
         <div class="cover-content">
             <h1>الواحة</h1>
@@ -110,18 +111,16 @@
         </div>
     </div>
 
-    <!-- الهيدر -->
     <div class="header" id="main-header">
         <h1>فول وفلافل الواحة</h1>
     </div>
 
     <div class="container">
         
-        <!-- الصفحة 1: الفول والبطاطس -->
+        <!-- الصفحة 1: الفول -->
         <div class="page" id="page-1">
             <div class="category">
                 <h2 class="category-title">سندوتشات الفول</h2>
-                <!-- توليد أصناف الفول -->
                 <script>
                     const foulItems = [
                         {id: 1, name: "فول الواحة", price: 15}, {id: 2, name: "فول زيت حار", price: 16}, {id: 3, name: "فول زيت زيتون", price: 16},
@@ -131,12 +130,10 @@
                         {id: 13, name: "فول دبل", price: 18}, {id: 14, name: "فول مخصوص", price: 18}, {id: 15, name: "فول ع صوابع", price: 22}, {id: 16, name: "فول ع بيض مسلوق", price: 25}
                     ];
                     foulItems.forEach(item => {
-                        document.write(`
-                            <div class="item" data-id="${item.id}" data-name="${item.name}" data-price="${item.price}">
-                                <div class="item-info"><span class="item-name">${item.name}</span><span class="item-price">${item.price} ج</span></div>
-                                <div class="quantity-control"><button onclick="updateQty(${item.id}, 1)">+</button><span id="qty-${item.id}">0</span><button onclick="updateQty(${item.id}, -1)">-</button></div>
-                            </div>
-                        `);
+                        document.write(`<div class="item" data-id="${item.id}" data-name="${item.name}" data-price="${item.price}">
+                            <div class="item-info"><span class="item-name">${item.name}</span><span class="item-price">${item.price} ج</span></div>
+                            <div class="quantity-control"><button onclick="updateQty(${item.id}, 1)">+</button><span id="qty-${item.id}">0</span><button onclick="updateQty(${item.id}, -1)">-</button></div>
+                        </div>`);
                     });
                 </script>
             </div>
@@ -157,12 +154,10 @@
                         {id: 35, name: "بطاطس بورية بالبيض", price: 25}, {id: 36, name: "بطاطس بورية ع جبنة رومي", price: 35}
                     ];
                     batatesItems.forEach(item => {
-                        document.write(`
-                            <div class="item" data-id="${item.id}" data-name="${item.name}" data-price="${item.price}">
-                                <div class="item-info"><span class="item-name">${item.name}</span><span class="item-price">${item.price} ج</span></div>
-                                <div class="quantity-control"><button onclick="updateQty(${item.id}, 1)">+</button><span id="qty-${item.id}">0</span><button onclick="updateQty(${item.id}, -1)">-</button></div>
-                            </div>
-                        `);
+                        document.write(`<div class="item" data-id="${item.id}" data-name="${item.name}" data-price="${item.price}">
+                            <div class="item-info"><span class="item-name">${item.name}</span><span class="item-price">${item.price} ج</span></div>
+                            <div class="quantity-control"><button onclick="updateQty(${item.id}, 1)">+</button><span id="qty-${item.id}">0</span><button onclick="updateQty(${item.id}, -1)">-</button></div>
+                        </div>`);
                     });
                 </script>
             </div>
@@ -180,12 +175,10 @@
                         {id: 46, name: "طعمية كيري", price: 25}, {id: 47, name: "طعمية ع أمليت", price: 30}, {id: 48, name: "طعمية دوبل", price: 18}, {id: 49, name: "طعمية عين كتكوت", price: 20}
                     ];
                     ta3meyaItems.forEach(item => {
-                        document.write(`
-                            <div class="item" data-id="${item.id}" data-name="${item.name}" data-price="${item.price}">
-                                <div class="item-info"><span class="item-name">${item.name}</span><span class="item-price">${item.price} ج</span></div>
-                                <div class="quantity-control"><button onclick="updateQty(${item.id}, 1)">+</button><span id="qty-${item.id}">0</span><button onclick="updateQty(${item.id}, -1)">-</button></div>
-                            </div>
-                        `);
+                        document.write(`<div class="item" data-id="${item.id}" data-name="${item.name}" data-price="${item.price}">
+                            <div class="item-info"><span class="item-name">${item.name}</span><span class="item-price">${item.price} ج</span></div>
+                            <div class="quantity-control"><button onclick="updateQty(${item.id}, 1)">+</button><span id="qty-${item.id}">0</span><button onclick="updateQty(${item.id}, -1)">-</button></div>
+                        </div>`);
                     });
                 </script>
             </div>
@@ -202,12 +195,10 @@
                         {id: 56, name: "جبنة قريش", price: 18}, {id: 57, name: "سندوتش مسقعة / باذنجان", price: 15}, {id: 58, name: "ديناميت", price: 35}
                     ];
                     omeletItems.forEach(item => {
-                        document.write(`
-                            <div class="item" data-id="${item.id}" data-name="${item.name}" data-price="${item.price}">
-                                <div class="item-info"><span class="item-name">${item.name}</span><span class="item-price">${item.price} ج</span></div>
-                                <div class="quantity-control"><button onclick="updateQty(${item.id}, 1)">+</button><span id="qty-${item.id}">0</span><button onclick="updateQty(${item.id}, -1)">-</button></div>
-                            </div>
-                        `);
+                        document.write(`<div class="item" data-id="${item.id}" data-name="${item.name}" data-price="${item.price}">
+                            <div class="item-info"><span class="item-name">${item.name}</span><span class="item-price">${item.price} ج</span></div>
+                            <div class="quantity-control"><button onclick="updateQty(${item.id}, 1)">+</button><span id="qty-${item.id}">0</span><button onclick="updateQty(${item.id}, -1)">-</button></div>
+                        </div>`);
                     });
                 </script>
             </div>
@@ -220,12 +211,10 @@
                         {id: 65, name: "قرص أماطي", price: 24}
                     ];
                     diskItems.forEach(item => {
-                        document.write(`
-                            <div class="item" data-id="${item.id}" data-name="${item.name}" data-price="${item.price}">
-                                <div class="item-info"><span class="item-name">${item.name}</span><span class="item-price">${item.price} ج</span></div>
-                                <div class="quantity-control"><button onclick="updateQty(${item.id}, 1)">+</button><span id="qty-${item.id}">0</span><button onclick="updateQty(${item.id}, -1)">-</button></div>
-                            </div>
-                        `);
+                        document.write(`<div class="item" data-id="${item.id}" data-name="${item.name}" data-price="${item.price}">
+                            <div class="item-info"><span class="item-name">${item.name}</span><span class="item-price">${item.price} ج</span></div>
+                            <div class="quantity-control"><button onclick="updateQty(${item.id}, 1)">+</button><span id="qty-${item.id}">0</span><button onclick="updateQty(${item.id}, -1)">-</button></div>
+                        </div>`);
                     });
                 </script>
             </div>
@@ -246,37 +235,81 @@
                         {id: 80, name: "طبق مقلية", price: 40}, {id: 81, name: "طبق طحينة (صغير)", price: 20}, {id: 82, name: "طبق طحينة (كبير)", price: 25}
                     ];
                     sofraItems.forEach(item => {
-                        document.write(`
-                            <div class="item" data-id="${item.id}" data-name="${item.name}" data-price="${item.price}">
-                                <div class="item-info"><span class="item-name">${item.name}</span><span class="item-price">${item.price} ج</span></div>
-                                <div class="quantity-control"><button onclick="updateQty(${item.id}, 1)">+</button><span id="qty-${item.id}">0</span><button onclick="updateQty(${item.id}, -1)">-</button></div>
-                            </div>
-                        `);
+                        document.write(`<div class="item" data-id="${item.id}" data-name="${item.name}" data-price="${item.price}">
+                            <div class="item-info"><span class="item-name">${item.name}</span><span class="item-price">${item.price} ج</span></div>
+                            <div class="quantity-control"><button onclick="updateQty(${item.id}, 1)">+</button><span id="qty-${item.id}">0</span><button onclick="updateQty(${item.id}, -1)">-</button></div>
+                        </div>`);
                     });
                 </script>
             </div>
         </div>
 
-        <!-- الصفحة 6: العلب والمشروبات -->
+        <!-- الصفحة 6: العلب والمشروبات (الكاملة) -->
         <div class="page" id="page-6">
             <div class="category">
-                <h2 class="category-title">ركن العلب والمشروبات</h2>
+                <h2 class="category-title">ركن العلب (فول)</h2>
                 <script>
-                    const 3elbaItems = [
+                    const foulBoxes = [
                         {id: 83, name: "علبة فول سادة (صغير)", price: 25}, {id: 84, name: "علبة فول سادة (كبير)", price: 30},
-                        {id: 85, name: "علبة فول اسكندراني (صغير)", price: 35}, {id: 86, name: "علبة فول اسكندراني (كبير)", price: 40},
-                        {id: 87, name: "مسقعة علبة (صغير)", price: 25}, {id: 88, name: "مسقعة علبة (كبير)", price: 32},
-                        {id: 89, name: "باكيت بطاطس صوابع (صغير)", price: 25}, {id: 90, name: "باكيت بطاطس صوابع (وسط)", price: 30}, {id: 91, name: "باكيت بطاطس صوابع (كبير)", price: 40},
-                        {id: 92, name: "سلطة بلدي", price: 10}, {id: 93, name: "بابا غنوج", price: 15}, {id: 94, name: "رغيف عيش", price: 3.5},
-                        {id: 95, name: "كانز كبيرة", price: 20}, {id: 96, name: "مياة معدنية", price: 10}
+                        {id: 85, name: "علبة فول زيت زيتون (صغير)", price: 30}, {id: 86, name: "علبة فول زيت زيتون (كبير)", price: 40},
+                        {id: 87, name: "علبة فول زيت حار (صغير)", price: 30}, {id: 88, name: "علبة فول زيت حار (كبير)", price: 35},
+                        {id: 89, name: "علبة فول الواحة (صغير)", price: 30}, {id: 90, name: "علبة فول الواحة (كبير)", price: 35},
+                        {id: 91, name: "علبة فول محوج (صغير)", price: 30}, {id: 92, name: "علبة فول محوج (كبير)", price: 35},
+                        {id: 93, name: "علبة فول اسكندراني (صغير)", price: 35}, {id: 94, name: "علبة فول اسكندراني (كبير)", price: 40},
+                        {id: 95, name: "علبة فول بالبيض (صغير)", price: 38}, {id: 96, name: "علبة فول بالبيض (كبير)", price: 45},
+                        {id: 97, name: "علبة فول أومليت (صغير)", price: 38}, {id: 98, name: "علبة فول أومليت (كبير)", price: 45},
+                        {id: 99, name: "علبة فول بالبسطرمة (صغير)", price: 40}, {id: 100, name: "علبة فول بالبسطرمة (كبير)", price: 50},
+                        {id: 101, name: "علبة فول بالصلصة (صغير)", price: 30}, {id: 102, name: "علبة فول بالصلصة (كبير)", price: 35}
                     ];
-                    3elbaItems.forEach(item => {
-                        document.write(`
-                            <div class="item" data-id="${item.id}" data-name="${item.name}" data-price="${item.price}">
-                                <div class="item-info"><span class="item-name">${item.name}</span><span class="item-price">${item.price} ج</span></div>
-                                <div class="quantity-control"><button onclick="updateQty(${item.id}, 1)">+</button><span id="qty-${item.id}">0</span><button onclick="updateQty(${item.id}, -1)">-</button></div>
-                            </div>
-                        `);
+                    foulBoxes.forEach(item => {
+                        document.write(`<div class="item" data-id="${item.id}" data-name="${item.name}" data-price="${item.price}">
+                            <div class="item-info"><span class="item-name">${item.name}</span><span class="item-price">${item.price} ج</span></div>
+                            <div class="quantity-control"><button onclick="updateQty(${item.id}, 1)">+</button><span id="qty-${item.id}">0</span><button onclick="updateQty(${item.id}, -1)">-</button></div>
+                        </div>`);
+                    });
+                </script>
+            </div>
+
+            <div class="category">
+                <h2 class="category-title">ركن العلب (إضافات)</h2>
+                <script>
+                    const extraBoxes = [
+                        {id: 103, name: "عجينة علبة (صغير)", price: 15}, {id: 104, name: "عجينة علبة (كبير)", price: 20},
+                        {id: 105, name: "مسقعة علبة (صغير)", price: 25}, {id: 106, name: "مسقعة علبة (كبير)", price: 32},
+                        {id: 107, name: "جبنة قريش علبة (صغير)", price: 30}, {id: 108, name: "جبنة قريش علبة (كبير)", price: 35},
+                        {id: 109, name: "بورية علبة (صغير)", price: 25}, {id: 110, name: "بورية علبة (كبير)", price: 35},
+                        {id: 111, name: "باذنجان علبة (صغير)", price: 10}, {id: 112, name: "باذنجان علبة (كبير)", price: 15},
+                        {id: 113, name: "شكشوكة علبة (صغير)", price: 25}, {id: 114, name: "شكشوكة علبة (كبير)", price: 35},
+                        {id: 115, name: "باكيت بطاطس صوابع (صغير)", price: 25}, {id: 116, name: "باكيت بطاطس صوابع (وسط)", price: 30}, {id: 117, name: "باكيت بطاطس صوابع (كبير)", price: 40},
+                        {id: 118, name: "باكيت شيبسي (صغير)", price: 20}, {id: 119, name: "باكيت شيبسي (وسط)", price: 25}, {id: 120, name: "باكيت شيبسي (كبير)", price: 30},
+                        {id: 121, name: "باكيت بطاطس جمبري (صغير)", price: 25}, {id: 122, name: "باكيت بطاطس جمبري (وسط)", price: 30}, {id: 123, name: "باكيت بطاطس جمبري (كبير)", price: 40}
+                    ];
+                    extraBoxes.forEach(item => {
+                        document.write(`<div class="item" data-id="${item.id}" data-name="${item.name}" data-price="${item.price}">
+                            <div class="item-info"><span class="item-name">${item.name}</span><span class="item-price">${item.price} ج</span></div>
+                            <div class="quantity-control"><button onclick="updateQty(${item.id}, 1)">+</button><span id="qty-${item.id}">0</span><button onclick="updateQty(${item.id}, -1)">-</button></div>
+                        </div>`);
+                    });
+                </script>
+            </div>
+
+            <div class="category">
+                <h2 class="category-title">السلطات والمشروبات</h2>
+                <script>
+                    const saladDrinks = [
+                        {id: 124, name: "سلطة بلدي (صغير)", price: 10}, {id: 125, name: "سلطة بلدي (كبير)", price: 15},
+                        {id: 126, name: "طبق مخلل مخصوص (صغير)", price: 10}, {id: 127, name: "طبق مخلل مخصوص (كبير)", price: 13},
+                        {id: 128, name: "طرشي (صغير)", price: 5}, {id: 129, name: "طرشي (وسط)", price: 10}, {id: 130, name: "طرشي (كبير)", price: 15},
+                        {id: 131, name: "بابا غنوج (صغير)", price: 15}, {id: 132, name: "بابا غنوج (كبير)", price: 20},
+                        {id: 133, name: "طحينة (صغير)", price: 10}, {id: 134, name: "طحينة (كبير)", price: 15},
+                        {id: 135, name: "رغيف عيش بلدي", price: 3.5}, {id: 136, name: "رغيف عيش شامي", price: 2},
+                        {id: 137, name: "كانز كبيرة", price: 20}, {id: 138, name: "مياة معدنية", price: 10}
+                    ];
+                    saladDrinks.forEach(item => {
+                        document.write(`<div class="item" data-id="${item.id}" data-name="${item.name}" data-price="${item.price}">
+                            <div class="item-info"><span class="item-name">${item.name}</span><span class="item-price">${item.price} ج</span></div>
+                            <div class="quantity-control"><button onclick="updateQty(${item.id}, 1)">+</button><span id="qty-${item.id}">0</span><button onclick="updateQty(${item.id}, -1)">-</button></div>
+                        </div>`);
                     });
                 </script>
             </div>
@@ -284,27 +317,24 @@
             <div class="notes">
                 <p>جميع السندوتشات (بلدي - شامي - فينو)</p>
                 <p>11 شارع النزهة ناصية تاج الدين السبكي</p>
-                <span class="phones">للتوصيل: <span dir="ltr">01154188441 - 0224178052</span></span>
                 <p class="instapay">يوجد انستا باي وكاش علي (01154188441)</p>
             </div>
         </div>
 
     </div>
 
-    <!-- السلة العائمة -->
     <div class="floating-cart" id="floatingCart" onclick="openCart()">
         <h3>السلة (<span id="cartCount">0</span>)</h3>
         <span>تأكيد الطلب ➔</span>
     </div>
 
-    <!-- شريط التقليب -->
     <div class="pagination" id="pagination">
         <button onclick="nextPage()" id="nextBtn">التالي</button>
         <span class="page-indicator" id="pageIndicator">1 / 6</span>
         <button onclick="prevPage()" id="prevBtn">السابق</button>
     </div>
 
-    <!-- نافذة الطلب (المودال) -->
+    <!-- نافذة الطلب ونظام الفاتورة -->
     <div class="cart-modal" id="cartModal">
         <div class="cart-content">
             <div class="cart-header">
@@ -314,12 +344,28 @@
             
             <div class="cart-items-list" id="cartItemsList"></div>
             
-            <div class="total-row">
-                <span>الإجمالي الكلي:</span>
-                <span id="modalTotal">0 ج</span>
+            <!-- نظام الفاتورة الجديد -->
+            <div class="invoice-box">
+                <div class="invoice-row">
+                    <span>سعر الطلبات:</span>
+                    <span id="subTotal">0 ج</span>
+                </div>
+                <div class="invoice-row" id="deliveryRow">
+                    <span>خدمة التوصيل:</span>
+                    <span id="deliveryFeeText">15 ج</span>
+                </div>
+                <div class="total-row">
+                    <span>الإجمالي النهائي:</span>
+                    <span id="finalTotal">0 ج</span>
+                </div>
+            </div>
+
+            <!-- نوع الطلب (دليفري أو صالة) -->
+            <div class="order-type-group">
+                <label><input type="radio" name="orderType" value="delivery" checked onchange="updateInvoice()"> دليفري توصيل</label>
+                <label><input type="radio" name="orderType" value="dinein" onchange="updateInvoice()"> صالة / تيك أواي</label>
             </div>
             
-            <!-- بيانات العميل الجديدة -->
             <div class="input-group">
                 <label>الاسم:</label>
                 <input type="text" id="custName" class="table-input" placeholder="اكتب اسمك هنا" required>
@@ -329,7 +375,7 @@
                 <input type="tel" id="custPhone" class="table-input" placeholder="01xxxxxxxxx" required>
             </div>
             <div class="input-group">
-                <label>العنوان تفصيلاً (أو رقم الترابيزة):</label>
+                <label id="addressLabel">العنوان تفصيلاً:</label>
                 <input type="text" id="custAddress" class="table-input" placeholder="الشارع، العمارة، الدور..." required>
             </div>
 
@@ -343,8 +389,11 @@
         let cart = {};
         let currentPage = 0;
         const totalPages = 6; 
+        
+        /* تقدر تغير سعر التوصيل من هنا بسهولة */
+        const DELIVERY_FEE = 15; 
+        let currentSubTotal = 0;
 
-        // التحكم في الصفحات
         function updateUI() {
             document.querySelectorAll('.page').forEach((page, index) => {
                 page.classList.remove('active');
@@ -383,7 +432,6 @@
             }
         });
 
-        // التحكم في السلة
         function updateQty(id, change) {
             let itemElement = document.querySelector(`.item[data-id="${id}"]`);
             let name = itemElement.getAttribute('data-name');
@@ -416,11 +464,11 @@
         function openCart() {
             let cartItemsList = document.getElementById('cartItemsList');
             cartItemsList.innerHTML = '';
-            let totalPrice = 0;
+            currentSubTotal = 0;
 
             for (let id in cart) {
                 let itemTotal = cart[id].qty * cart[id].price;
-                totalPrice += itemTotal;
+                currentSubTotal += itemTotal;
                 cartItemsList.innerHTML += `
                     <div class="cart-item-row">
                         <span>${cart[id].qty}x ${cart[id].name}</span>
@@ -428,39 +476,77 @@
                     </div>
                 `;
             }
-            document.getElementById('modalTotal').innerText = totalPrice + ' ج';
+            
+            updateInvoice();
             document.getElementById('cartModal').style.display = 'flex';
         }
 
         function closeCart() { document.getElementById('cartModal').style.display = 'none'; }
 
-        // إرسال الطلب للواتساب
+        /* دالة تحديث الفاتورة بناءً على التوصيل أو الصالة */
+        function updateInvoice() {
+            let orderType = document.querySelector('input[name="orderType"]:checked').value;
+            let deliveryRow = document.getElementById('deliveryRow');
+            let finalTotalElem = document.getElementById('finalTotal');
+            let addressLabel = document.getElementById('addressLabel');
+            let addressInput = document.getElementById('custAddress');
+
+            document.getElementById('subTotal').innerText = currentSubTotal + ' ج';
+
+            if (orderType === 'delivery') {
+                deliveryRow.style.display = 'flex';
+                document.getElementById('deliveryFeeText').innerText = DELIVERY_FEE + ' ج';
+                finalTotalElem.innerText = (currentSubTotal + DELIVERY_FEE) + ' ج';
+                addressLabel.innerText = 'العنوان تفصيلاً:';
+                addressInput.placeholder = 'الشارع، العمارة، الدور...';
+            } else {
+                deliveryRow.style.display = 'none';
+                finalTotalElem.innerText = currentSubTotal + ' ج';
+                addressLabel.innerText = 'رقم الترابيزة:';
+                addressInput.placeholder = 'اكتب رقم الترابيزة أو تيك أواي';
+            }
+        }
+
         function sendOrder() {
             let name = document.getElementById('custName').value.trim();
             let phone = document.getElementById('custPhone').value.trim();
             let address = document.getElementById('custAddress').value.trim();
+            let orderType = document.querySelector('input[name="orderType"]:checked').value;
 
             if (name === '' || phone === '' || address === '') {
-                alert('برجاء استكمال بيانات الاسم ورقم الموبايل والعنوان تفصيلاً!');
+                alert('برجاء استكمال البيانات (الاسم، الموبايل، العنوان/الترابيزة)!');
                 return;
             }
 
             let message = "*طلب جديد من المنيو الديجيتال 🔴* \n\n";
             message += `*الاسم:* ${name}\n`;
             message += `*رقم الموبايل:* ${phone}\n`;
-            message += `*العنوان تفصيلاً:* ${address}\n\n`;
+            
+            if (orderType === 'delivery') {
+                message += `*نوع الطلب:* دليفري 🛵\n`;
+                message += `*العنوان:* ${address}\n\n`;
+            } else {
+                message += `*نوع الطلب:* صالة / تيك أواي 🍽️\n`;
+                message += `*رقم الترابيزة:* ${address}\n\n`;
+            }
+
             message += `*الطلبات:*\n`;
             
-            let totalPrice = 0;
             for (let id in cart) {
                 let itemTotal = cart[id].qty * cart[id].price;
-                totalPrice += itemTotal;
                 message += `- ${cart[id].qty}x ${cart[id].name} (${itemTotal} ج)\n`;
             }
 
-            message += `\n*الإجمالي الكلي:* ${totalPrice} ج\n`;
+            message += `\n*سعر الطلبات:* ${currentSubTotal} ج\n`;
+            
+            if (orderType === 'delivery') {
+                message += `*خدمة التوصيل:* ${DELIVERY_FEE} ج\n`;
+                message += `*الإجمالي النهائي:* ${currentSubTotal + DELIVERY_FEE} ج\n`;
+            } else {
+                message += `*الإجمالي النهائي:* ${currentSubTotal} ج\n`;
+            }
 
-            let whatsappNumber = "201013606635"; 
+            let whatsappNumber = "201154188441"; 
             let encodedMessage = encodeURIComponent(message);
             window.open(`https://wa.me/${whatsappNumber}?text=${encodedMessage}`, '_blank');
         }
